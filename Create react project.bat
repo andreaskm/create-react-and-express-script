@@ -14,9 +14,7 @@ call npm init -y
 call npm install -D parcel
 call npm i react react-dom react-router-dom
 :: new
-rename package.json oldpackage.json
-findstr /V "main" oldpackage.json > package.json
-del oldpackage.json
+call npm pkg delete main
 (
     echo ^<!DOCTYPE html^>
     echo ^<html lang="en"^>
