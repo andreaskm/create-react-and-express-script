@@ -54,29 +54,6 @@ call npm pkg set scripts.dev="nodemon server.js"
 ) > server.js
 
 :: new
-setlocal enabledelayedexpansion
-
-set "inputFile=package.json"
-set "tempFile=temp.json"
-set "appendString=  ,^"type^": ^"module" 
-
-:: Read the input JSON file and append the string before the last bracket
-(for /f "tokens=*" %%A in (!inputFile!) do (
-    set "line=%%A"
-    if defined lastLine (
-        echo !lastLine!>> !tempFile!
-    )
-    set "lastLine=!line!"
-))
-
-:: Append the string to the last line
-echo %appendString%^">> !tempFile!
-echo }>> !tempFile!
-
-:: Replace the original file with the temp file
-move /y !tempFile! !inputFile!
-
-endlocal
-
+call npm pkg set type="module"
 pause
 
